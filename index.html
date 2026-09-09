@@ -11,7 +11,7 @@
 
     body {
       background-color: #000000;
-      color: #cfcfcf;
+      color: #ffffff;
       font-family: "Courier New", Courier, monospace;
       height: 100vh;
       margin: 0;
@@ -24,11 +24,11 @@
 
     /* Toile Canvas pour les animations riches (étoiles, filaments massifs, poussière spectrale) */
     #canvas-etoiles {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       z-index: 1;
       pointer-events: none;
     }
@@ -99,14 +99,14 @@
       display: block;
     }
 
-    /* Texte agrandi, aérien et parfaitement lisible */
+    /* Texte en blanc pur renforcé et parfaitement lisible */
     p {
       font-size: 1.25rem;
       line-height: 2.3;
       letter-spacing: 1.1px;
-      color: #e2e2e2;
+      color: #ffffff;
       margin-bottom: 30px;
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
     }
 
     /* Image finale intégrée dans l'ambiance Y2K */
@@ -127,7 +127,7 @@
 </head>
 <body>
 
-  <!-- Toile d'animation dynamique (Étoiles, filaments massifs, poussière spectrale) -->
+  <!-- Toile d'animation dynamique -->
   <canvas id="canvas-etoiles"></canvas>
 
   <!-- Écran d'accueil -->
@@ -200,7 +200,7 @@
   <!-- Parcelle 8 : Image finale -->
   <div class="parcelle" id="parcelle-8">
     <img src="image-fin.jpg" alt="Final" class="image-finale">
-    <p style="font-size: 1.1rem; letter-spacing: 2px; color: #888;">[ fin de transmission ]</p>
+    <p style="font-size: 1.1rem; letter-spacing: 2px; color: #aaaaaa;">[ fin de transmission ]</p>
   </div>
 
   <!-- Élément Audio natif -->
@@ -227,7 +227,7 @@
       document.getElementById('parcelle-' + numero).classList.add('active');
     }
 
-    // --- ANIMATION CANVAS EN CONTINU (Sans interruption) ---
+    // --- ANIMATION CANVAS ROBUSTE ET CONTINUE ---
     const canvas = document.getElementById('canvas-etoiles');
     const ctx = canvas.getContext('2d');
 
@@ -238,7 +238,7 @@
     window.addEventListener('resize', redimensionner);
     redimensionner();
 
-    const nombreEtoiles = 250;
+    const nombreEtoiles = 280;
     const etoiles = [];
 
     for (let i = 0; i < nombreEtoiles; i++) {
@@ -254,7 +254,7 @@
     }
 
     const spectres = [];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 60; i++) {
       spectres.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -269,14 +269,14 @@
     let angleOnde = 0;
 
     function animer() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.22)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Vagues spectrales
       ctx.save();
       for (let i = 0; i < 6; i++) {
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(255, 255, 255, ${0.02 + i * 0.012})`;
+        ctx.strokeStyle = `rgba(255, 255, 255, ${0.03 + i * 0.012})`;
         ctx.lineWidth = 1.2;
         let pasY = canvas.height / 2 + (i - 2.5) * 70;
         for (let x = 0; x < canvas.width; x += 15) {
@@ -289,7 +289,7 @@
       ctx.restore();
       angleOnde += 0.01;
 
-      // Formes de poussière spectrale
+      // Poussière spectrale
       spectres.forEach(s => {
         s.y += s.vitesseY;
         s.x += s.dispersion;
@@ -302,7 +302,7 @@
           s.vie = 0;
         }
 
-        ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0, fade * 0.65)})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0, fade * 0.7)})`;
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.taille * fade, 0, Math.PI * 2);
         ctx.fill();
@@ -335,7 +335,7 @@
           let dy = e.y - autreEtoile.y;
           let distance = Math.sqrt(dx * dx + dy * dy);
           if (distance < 90) {
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 * (1 - distance / 90)})`;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.22 * (1 - distance / 90)})`;
             ctx.lineWidth = 0.6;
             ctx.beginPath();
             ctx.moveTo(e.x, e.y);
@@ -348,7 +348,7 @@
       requestAnimationFrame(animer);
     }
 
-    // Lancement de la boucle d'animation en continu
+    // Démarrage immédiat et sécurisé de l'animation
     animer();
   </script>
 
