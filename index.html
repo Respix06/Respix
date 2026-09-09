@@ -22,7 +22,7 @@
       flex-direction: column;
     }
 
-    /* Toile Canvas fixée en arrière-plan pour les fractales et fils stellaires */
+    /* Toile Canvas fixée en arrière-plan */
     #canvas-etoiles {
       position: fixed;
       top: 0;
@@ -209,7 +209,7 @@
   </audio>
 
   <script>
-    let clickCount = 0; // Compteur pour le crescendo de couleurs à chaque clic
+    let clickCount = 0;
 
     function lancerExperience() {
       document.getElementById('ecran-accueil').style.display = 'none';
@@ -228,17 +228,14 @@
       toutesLesParcelles.forEach(p => p.classList.remove('active'));
       document.getElementById('parcelle-' + numero).classList.add('active');
       
-      // Incrémente le compteur pour embraser de plus en plus d'étoiles en couleur
       clickCount++;
-      
-      // Colorise progressivement un pourcentage d'étoiles à chaque clic (Crescendo)
       let targetColored = Math.floor((clickCount / 7) * etoiles.length);
       for(let i = 0; i < targetColored; i++) {
         etoiles[i].isColored = true;
       }
     }
 
-    // --- MOTEUR D'ANIMATION CANVAS : FRACTALES STELLAIRES & FILS TORDUS ---
+    // --- MOTEUR CANVAS CORRIGÉ ET SÉCURISÉ ---
     const canvas = document.getElementById('canvas-etoiles');
     const ctx = canvas.getContext('2d');
 
@@ -285,7 +282,7 @@
         let glow = 6;
 
         if (this.isColored) {
-          couleur = `hsl(${this.hue}, 95%`, 75%);
+          couleur = `hsl(${this.hue}, 95%, 75%)`;
           glow = 18;
         }
 
@@ -293,7 +290,6 @@
         ctx.shadowColor = couleur;
         ctx.fillStyle = couleur;
 
-        // Forme d'étoile fractale / géométrique à 4 pointes
         ctx.beginPath();
         let branches = 4;
         let rExt = this.taille * 2.5;
@@ -319,13 +315,11 @@
     let temps = 0;
 
     function animer() {
-      // Effet de traînée fluide
       ctx.fillStyle = 'rgba(0, 0, 0, 0.22)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       temps += 0.015;
 
-      // Dessiner les fils stellaires tordus de manière organique
       for (let i = 0; i < etoiles.length; i++) {
         for (let j = i + 1; j < etoiles.length; j++) {
           let dx = etoiles[i].x - etoiles[j].x;
@@ -334,7 +328,6 @@
 
           if (distance < 110) {
             ctx.beginPath();
-            // Courbe de Bézier pour donner un effet de fil qui se tord fluidement
             let cx = (etoiles[i].x + etoiles[j].x) / 2 + Math.sin(temps + i) * 25;
             let cy = (etoiles[i].y + etoiles[j].y) / 2 + Math.cos(temps + j) * 25;
             
@@ -355,7 +348,6 @@
         }
       }
 
-      // Mettre à jour et dessiner les étoiles
       etoiles.forEach(e => {
         e.update();
         e.draw();
@@ -364,7 +356,6 @@
       requestAnimationFrame(animer);
     }
 
-    // Lancement de la boucle d'animation en continu
     animer();
   </script>
 
