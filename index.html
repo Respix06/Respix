@@ -22,7 +22,7 @@
       flex-direction: column;
     }
 
-    /* Toile Canvas pour les animations complexes d'étoiles et filaments stellaires */
+    /* Toile Canvas pour les animations riches (étoiles, filaments massifs, poussière spectrale) */
     #canvas-etoiles {
       position: absolute;
       top: 0;
@@ -96,7 +96,7 @@
       display: block;
     }
 
-    /* Texte agrandi et plus lisible */
+    /* Texte agrandi et aérien */
     p {
       font-size: 1.35rem;
       line-height: 2.5;
@@ -104,6 +104,16 @@
       color: #e2e2e2;
       margin-bottom: 45px;
       text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+    }
+
+    /* Image finale intégrée dans l'ambiance Y2K */
+    .image-finale {
+      max-width: 400px;
+      max-height: 45vh;
+      border: 1px solid #555;
+      box-shadow: 0 0 35px rgba(255, 255, 255, 0.15);
+      margin-bottom: 25px;
+      filter: contrast(105%) brightness(95%);
     }
 
     @keyframes apparitionTexte {
@@ -114,7 +124,7 @@
 </head>
 <body>
 
-  <!-- Toile d'animation dynamique (Étoiles, filaments stellaires, ondes spirituelles) -->
+  <!-- Toile d'animation dynamique (Étoiles, filaments massifs, poussière spectrale) -->
   <canvas id="canvas-etoiles"></canvas>
 
   <!-- Écran d'accueil -->
@@ -146,15 +156,21 @@
       Je sais maintenant m'exprimer en toute liberté de conscience, et je te le dis avec le coeur : je suis désolé pour tout le mal que j'ai pu te faire.<br><br>
       Je n'attends rien en retour, juste la vérité comme finalité. Un simple échange pour poser les choses à plat me semble la meilleure chose à faire. Merci à toi d'avoir pris le temps de lire.
     </p>
+    <button class="btn-y2k" onclick="changerParcelle(4)">[ suivant ]</button>
   </div>
 
-  <!-- Élément Audio natif et robuste -->
+  <!-- Parcelle 4 : Image finale -->
+  <div class="parcelle" id="parcelle-4">
+    <img src="image-fin.jpg" alt="Final" class="image-finale">
+    <p style="font-size: 1.1rem; letter-spacing: 2px; color: #888;">[ fin de transmission ]</p>
+  </div>
+
+  <!-- Élément Audio natif -->
   <audio id="audio-fond" loop preload="auto">
     <source src="musique.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    // --- GESTION DE LA MUSIQUE ---
     function lancerExperience() {
       document.getElementById('ecran-accueil').style.display = 'none';
       
@@ -173,7 +189,7 @@
       document.getElementById('parcelle-' + numero).classList.add('active');
     }
 
-    // --- ANIMATION CANVAS : ÉTOILES, FILAMENTS STELLAIRES ET FORMES SPIRITUELLES VIBE JOJI ---
+    // --- ANIMATION CANVAS (Filaments massifs, étoiles et formes spectrales se dissolvant en poussière) ---
     const canvas = document.getElementById('canvas-etoiles');
     const ctx = canvas.getContext('2d');
 
@@ -184,58 +200,88 @@
     window.addEventListener('resize', redimensionner);
     redimensionner();
 
-    // Création d'un champ d'étoiles / particules riche
-    const nombreEtoiles = 150;
+    // Champ d'étoiles très dense
+    const nombreEtoiles = 250;
     const etoiles = [];
 
     for (let i = 0; i < nombreEtoiles; i++) {
       etoiles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        taille: Math.random() * 2.2 + 0.5,
-        vitesseX: (Math.random() - 0.5) * 0.3,
-        vitesseY: -Math.random() * 0.5 - 0.1, // Flotte vers le haut (ambiance ascensionnelle / spirituelle)
+        taille: Math.random() * 2.5 + 0.5,
+        vitesseX: (Math.random() - 0.5) * 0.4,
+        vitesseY: -Math.random() * 0.8 - 0.2,
         opacite: Math.random(),
-        scintillement: Math.random() * 0.02 + 0.005
+        scintillement: Math.random() * 0.03 + 0.01
       });
     }
 
-    // Formes spirituelles / vagues éthérées en arrière-plan
+    // Formes de poussière spectrale se désintégrant
+    const spectres = [];
+    for (let i = 0; i < 50; i++) {
+      spectres.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        taille: Math.random() * 4 + 1,
+        vitesseY: -Math.random() * 1.5 - 0.5,
+        dispersion: (Math.random() - 0.5) * 1.2,
+        vie: Math.random() * 100,
+        maxVie: 150 + Math.random() * 100
+      });
+    }
+
     let angleOnde = 0;
 
     function animer() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'; // Traînée douce pour l'effet de flou cinétique
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.22)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // 1. Dessiner les filaments stellaires et vagues spirituelles blanches (Vibe Joji / Lo-fi)
+      // 1. Vagues spectrales multiples en arrière-plan
       ctx.save();
-      ctx.lineWidth = 1;
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 6; i++) {
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(255, 255, 255, ${0.03 + i * 0.02})`;
-        let pasY = canvas.height / 2 + (i - 1) * 100;
-        for (let x = 0; x < canvas.width; x += 10) {
-          let y = pasY + Math.sin(x * 0.003 + angleOnde + i) * 80 * Math.cos(angleOnde * 0.5);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${0.02 + i * 0.012})`;
+        ctx.lineWidth = 1.2;
+        let pasY = canvas.height / 2 + (i - 2.5) * 70;
+        for (let x = 0; x < canvas.width; x += 15) {
+          let y = pasY + Math.sin(x * 0.002 + angleOnde + i * 0.8) * 110 * Math.cos(angleOnde * 0.4);
           if (x === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
         ctx.stroke();
       }
       ctx.restore();
-      angleOnde += 0.012;
+      angleOnde += 0.01;
 
-      // 2. Dessiner et animer les étoiles et filaments de poussière
+      // 2. Gestion des formes spectrales se dégradant en poussière
+      spectres.forEach(s => {
+        s.y += s.vitesseY;
+        s.x += s.dispersion;
+        s.vie++;
+
+        let fade = 1 - (s.vie / s.maxVie);
+        if (fade <= 0 || s.y < 0) {
+          s.y = canvas.height + 20;
+          s.x = Math.random() * canvas.width;
+          s.vie = 0;
+        }
+
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0, fade * 0.65)})`;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.taille * fade, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // 3. Étoiles et filaments stellaires denses interconnectés
       etoiles.forEach(e => {
         e.x += e.vitesseX;
         e.y += e.vitesseY;
 
-        // Effet de scintillement organique
         e.opacite += e.scintillement;
         if (e.opacite > 1 || e.opacite < 0.1) {
           e.scintillement = -e.scintillement;
         }
 
-        // Recycler les étoiles si elles sortent de l'écran
         if (e.y < 0) {
           e.y = canvas.height + 10;
           e.x = Math.random() * canvas.width;
@@ -248,14 +294,14 @@
         ctx.arc(e.x, e.y, e.taille, 0, Math.PI * 2);
         ctx.fill();
 
-        // Relier certaines étoiles proches par de fins filaments stellaires
+        // Connexions par filaments stellaires rapprochés en grande quantité
         etoiles.forEach(autreEtoile => {
           let dx = e.x - autreEtoile.x;
           let dy = e.y - autreEtoile.y;
           let distance = Math.sqrt(dx * dx + dy * dy);
-          if (distance < 70) {
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.15 * (1 - distance / 70)})`;
-            ctx.lineWidth = 0.5;
+          if (distance < 90) {
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 * (1 - distance / 90)})`;
+            ctx.lineWidth = 0.6;
             ctx.beginPath();
             ctx.moveTo(e.x, e.y);
             ctx.lineTo(autreEtoile.x, autreEtoile.y);
