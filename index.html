@@ -22,7 +22,7 @@
       flex-direction: column;
     }
 
-    /* Toile Canvas pour les animations riches (étoiles, filaments massifs, poussière spectrale) */
+    /* Toile Canvas d'animation fixée en arrière-plan */
     #canvas-etoiles {
       position: fixed;
       top: 0;
@@ -99,7 +99,7 @@
       display: block;
     }
 
-    /* Texte en blanc pur renforcé et parfaitement lisible */
+    /* Texte en blanc pur renforcé */
     p {
       font-size: 1.25rem;
       line-height: 2.3;
@@ -109,7 +109,7 @@
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
     }
 
-    /* Image finale intégrée dans l'ambiance Y2K */
+    /* Image finale */
     .image-finale {
       max-width: 380px;
       max-height: 40vh;
@@ -209,6 +209,8 @@
   </audio>
 
   <script>
+    let niveauProgression = 0; // Permet de suivre l'évolution des couleurs avec les clics
+
     function lancerExperience() {
       document.getElementById('ecran-accueil').style.display = 'none';
       
@@ -225,9 +227,12 @@
       const toutesLesParcelles = document.querySelectorAll('.parcelle');
       toutesLesParcelles.forEach(p => p.classList.remove('active'));
       document.getElementById('parcelle-' + numero).classList.add('active');
+      
+      // Incrémente le niveau de couleur à chaque clic pour embraser les étoiles
+      niveauProgression = numero; 
     }
 
-    // --- ANIMATION CANVAS ROBUSTE ET CONTINUE ---
+    // --- ANIMATION CANVAS VIBRANTE ET COLORÉE AU FIL DES CLICS ---
     const canvas = document.getElementById('canvas-etoiles');
     const ctx = canvas.getContext('2d');
 
@@ -238,46 +243,50 @@
     window.addEventListener('resize', redimensionner);
     redimensionner();
 
-    const nombreEtoiles = 280;
+    const nombreEtoiles = 300;
     const etoiles = [];
 
     for (let i = 0; i < nombreEtoiles; i++) {
       etoiles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        taille: Math.random() * 2.5 + 0.5,
-        vitesseX: (Math.random() - 0.5) * 0.4,
-        vitesseY: -Math.random() * 0.8 - 0.2,
+        taille: Math.random() * 2.8 + 0.6,
+        vitesseX: (Math.random() - 0.5) * 0.5,
+        vitesseY: -Math.random() * 0.9 - 0.3,
         opacite: Math.random(),
-        scintillement: Math.random() * 0.03 + 0.01
+        scintillement: Math.random() * 0.03 + 0.01,
+        baseHue: Math.random() * 360 // Teinte de couleur unique pour chaque étoile
       });
     }
 
     const spectres = [];
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 70; i++) {
       spectres.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        taille: Math.random() * 4 + 1,
-        vitesseY: -Math.random() * 1.5 - 0.5,
-        dispersion: (Math.random() - 0.5) * 1.2,
+        taille: Math.random() * 5 + 1,
+        vitesseY: -Math.random() * 1.8 - 0.6,
+        dispersion: (Math.random() - 0.5) * 1.5,
         vie: Math.random() * 100,
-        maxVie: 150 + Math.random() * 100
+        maxVie: 150 + Math.random() * 100,
+        hue: Math.random() * 360
       });
     }
 
     let angleOnde = 0;
 
     function animer() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Vagues spectrales
+      // 1. Vagues spectrales en arrière-plan (prennent des teintes colorées selon la progression)
       ctx.save();
       for (let i = 0; i < 6; i++) {
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(255, 255, 255, ${0.03 + i * 0.012})`;
-        ctx.lineWidth = 1.2;
+        let hueOnde = (i * 60 + niveauProgression * 30) % 360;
+        let saturationOnde = niveauProgression > 0 ? '70%' : '0%';
+        ctx.strokeStyle = `hsla(${hueOnde}, ${saturationOnde}, 80%, ${0.04 + i * 0.015})`;
+        ctx.lineWidth = 1.5;
         let pasY = canvas.height / 2 + (i - 2.5) * 70;
         for (let x = 0; x < canvas.width; x += 15) {
           let y = pasY + Math.sin(x * 0.002 + angleOnde + i * 0.8) * 110 * Math.cos(angleOnde * 0.4);
@@ -287,9 +296,9 @@
         ctx.stroke();
       }
       ctx.restore();
-      angleOnde += 0.01;
+      angleOnde += 0.012;
 
-      // Poussière spectrale
+      // 2. Formes de poussière spectrale se désintégrant (colorées selon les clics)
       spectres.forEach(s => {
         s.y += s.vitesseY;
         s.x += s.dispersion;
@@ -302,13 +311,15 @@
           s.vie = 0;
         }
 
-        ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0, fade * 0.7)})`;
+        let saturation = niveauProgression > 0 ? '80%' : '0%';
+        let lightness = niveauProgression > 0 ? '75%' : '100%';
+        ctx.fillStyle = `hsla(${s.hue}, ${saturation}, ${lightness}, ${Math.max(0, fade * 0.75)})`;
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.taille * fade, 0, Math.PI * 2);
         ctx.fill();
       });
 
-      // Étoiles et filaments stellaires
+      // 3. Étoiles et filaments stellaires (Deviennent de plus en plus colorés à chaque clic)
       etoiles.forEach(e => {
         e.x += e.vitesseX;
         e.y += e.vitesseY;
@@ -325,17 +336,23 @@
         if (e.x < 0) e.x = canvas.width;
         if (e.x > canvas.width) e.x = 0;
 
-        ctx.fillStyle = `rgba(255, 255, 255, ${e.opacite})`;
+        // Évolution de la couleur en fonction du nombre de clics (niveauProgression)
+        let saturation = niveauProgression > 0 ? `${Math.min(100, niveauProgression * 15)}%` : '0%';
+        let lightness = niveauProgression > 0 ? '70%' : '100%';
+        
+        ctx.fillStyle = `hsla(${e.baseHue}, ${saturation}, ${lightness}, ${e.opacite})`;
         ctx.beginPath();
         ctx.arc(e.x, e.y, e.taille, 0, Math.PI * 2);
         ctx.fill();
 
+        // Filaments stellaires interconnectés
         etoiles.forEach(autreEtoile => {
           let dx = e.x - autreEtoile.x;
           let dy = e.y - autreEtoile.y;
           let distance = Math.sqrt(dx * dx + dy * dy);
-          if (distance < 90) {
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.22 * (1 - distance / 90)})`;
+          if (distance < 100) {
+            let satLigne = niveauProgression > 0 ? '80%': '0%';
+            ctx.strokeStyle = `hsla(${e.baseHue}, ${satLigne}, 75%, ${0.25 * (1 - distance / 100)})`;
             ctx.lineWidth = 0.6;
             ctx.beginPath();
             ctx.moveTo(e.x, e.y);
@@ -348,7 +365,7 @@
       requestAnimationFrame(animer);
     }
 
-    // Démarrage immédiat et sécurisé de l'animation
+    // Lancement immédiat de la boucle d'animation
     animer();
   </script>
 
