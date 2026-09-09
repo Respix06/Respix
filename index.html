@@ -2,41 +2,76 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Test Respix</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Respix</title>
   <style>
     body {
-      background-color: #030303;
-      color: #fff;
-      font-family: Georgia, serif;
-      height: 100vh;
+      background-color: #050505;
+      color: #b3b3b3;
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 60px 20px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      margin: 0;
+      line-height: 2.2;
     }
-    .box {
-      max-width: 600px;
-      text-align: center;
-      line-height: 2;
-      font-size: 1.2rem;
-      color: #ccc;
+    .lettre-container {
+      max-width: 650px;
+      width: 100%;
+      text-align: left;
     }
-    audio {
-      margin-top: 30px;
+    p {
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      opacity: 0.9;
+    }
+    .signature {
+      margin-top: 60px;
+      font-style: italic;
+      color: #666;
+    }
+    /* Lecteur audio discret en bas */
+    .audio-fixed {
+      position: fixed;
+      bottom: 20px;
+      opacity: 0.3;
+      transition: opacity 0.3s;
+    }
+    .audio-fixed:hover {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
 
-  <div class="box">
+  <div class="lettre-container">
     <p>Joyeux jours à toi j'espère..</p>
-    <p>Les mots n'ont plus de sens, mais est ce que t'apporter ces informations sur moi pourrait y changer quelque chose, non je ne le pense pas.</p>
     
-    <!-- Un vrai lecteur audio visible pour tester si le fichier mp3 fonctionne -->
-    <audio controls>
+    <p>Les mots n'ont plus de sens, mais est ce que t'apporter ces informations sur moi pourrait y changer quelque chose, non je ne le pense pas. Malgré tout je voudrais t'en informer. M'attacher à ces bouts de vies qui m'ont forgé, ce n'est plus un soucis.</p>
+    
+    <p>J'ai eu de nombreuses expériences particulièrement spéciales tant dans le douloureux que dans le positif. J'ai accumulé les informations sur la plupart des choses de la vie au fur et à mesure des années, fatigué oui, mais maintenant je suis en coeur avec moi même.</p>
+    
+    <p>Je suis enfin devenu petit à petit un homme un peu plus libre chaque jours. Comprendre m'a permis de relativiser, et d'apporter un fonctionnement appart qui me sert de mouvement de vie. Tout ce que je recherchais se concrétise, j'arrive pour le mieux dans le pire, au bord oui, mais je peux maintenant survoler ces rives avec les couleurs que j'ai enfin souhaiter. Je suis libre, je n'ai pas choisis d'être au plus mal, mais j'ai choisi d'être qui je suis maintenant.</p>
+    
+    <p>J'ai creusé tant de temps pour apprendre toujours plus.</p>
+    
+    <p>Je suis diagnostiquée Schizophrène/TSA/TDAH donc j'ai une ribambelle de comorbidité, ce qui n'est pas un soucis, j'aime ma couleur de coeur, sa noirceur aussi, je prends ma vie au sens de la raison. La plupart de mes comportements, mécanismes, symptômes, manières d'être et de faire, sont compréhensible par ces liaisons de troubles, dictés d'une façon ou d'une autre par des bouts de pathologie mixés.</p>
+    
+    <p>Je souhaite et j'ai toujours souhaité vouloir me faire comprendre et expliquer mes pensées, et, je suis ici présent encore et encore, pour que tu puisses me laisser une chance d'échanger, sans but précis si ce n' est parler de ce que je n'ai jamais pu te dire, je ne veux pas rentrer dans ta vie pour la troubler encore je te l'assure. Il me faut un moment cette liberté d'exprimer tout ce bordel que j'ai vécu dans ma vie, enfin, tout celui que j'ai laisser à certains moments sans explication ou raison valable.</p>
+    
+    <p>Être clair, dire la vérité, avoir ma liberté de pouvoir enfin le faire, je t'en prie, j'ai grandis et j'ai pour une fois plus aucune censure d'être. Mon envie de donner cette lumière sur ce flou, me permettrait d'avoir enfin cette paix d'esprit, que touts ces doutes que tu as sûrement du avoir ont des réponses, oui je t'ai blessé et ca n'a jamais était mon intention, je te le jure. Mes excuses paraîtront sûrement fade ou amer et ça ne justifiera pas mes comportements passées. Seulement, il y a maintenant des explications et des raisons du pourquoi du comment. Je sais maintenant m'exprimer en toute liberté de conscience, et je te le dis avec le coeur, la pensée et la vie qu'on a mené, que je suis désolé pour tout le mal que je t'ai fais.</p>
+    
+    <p>Je n'attends rien que tu puisses regretter, j'ai toujours voulu être droits et honnête, et c'est la vérité que j'aimerai transmettre aujourd'hui comme finalité. Sans en demander de renouement entre nous, un échange pour discuter et apporter un état d'esprit de clarté me semble une des meilleures choses à faire, Merci.</p>
+    
+    <div class="signature">Respix</div>
+  </div>
+
+  <!-- Lecteur audio -->
+  <div class="audio-fixed">
+    <audio controls loop>
       <source src="musique.mp3" type="audio/mpeg">
-      Votre navigateur ne supporte pas l'audio.
     </audio>
   </div>
 
