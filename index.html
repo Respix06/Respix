@@ -85,34 +85,37 @@
     .parcelle {
       display: none;
       width: 85%;
-      max-width: 680px;
+      max-width: 720px;
       text-align: center;
       position: absolute;
       z-index: 15;
       animation: apparitionTexte 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      max-height: 75vh;
+      overflow-y: auto;
+      padding: 10px;
     }
 
     .parcelle.active {
       display: block;
     }
 
-    /* Texte agrandi et aérien */
+    /* Texte agrandi, aérien et parfaitement lisible */
     p {
-      font-size: 1.35rem;
-      line-height: 2.5;
-      letter-spacing: 1.2px;
+      font-size: 1.25rem;
+      line-height: 2.3;
+      letter-spacing: 1.1px;
       color: #e2e2e2;
-      margin-bottom: 45px;
+      margin-bottom: 30px;
       text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
     }
 
     /* Image finale intégrée dans l'ambiance Y2K */
     .image-finale {
-      max-width: 400px;
-      max-height: 45vh;
+      max-width: 380px;
+      max-height: 40vh;
       border: 1px solid #555;
       box-shadow: 0 0 35px rgba(255, 255, 255, 0.15);
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       filter: contrast(105%) brightness(95%);
     }
 
@@ -136,7 +139,8 @@
   <div class="parcelle" id="parcelle-1">
     <p>
       Joyeux jours à toi j'espère..<br><br>
-      Les mots n'ont plus de sens, mais est ce que t'apporter ces informations sur moi pourrait y changer quelque chose, non je ne le pense pas. Malgré tout je voudrais t'en informer. M'attacher à ces bouts de vies qui m'ont forgé, ce n'est plus un soucis. J'ai accumulé les informations sur la plupart des choses de la vie, fatigué oui, mais maintenant je suis en coeur avec moi même.
+      Les mots n'ont plus de sens, mais est ce que t'apporter ces informations sur moi pourrait y changer quelque chose, non je ne le pense pas.<br><br>
+      Malgré tout je voudrais t'en informer. M'attacher à ces bouts de vies qui m'ont forgé, ce n'est plus un soucis.
     </p>
     <button class="btn-y2k" onclick="changerParcelle(2)">[ suivant ]</button>
   </div>
@@ -144,8 +148,8 @@
   <!-- Parcelle 2 -->
   <div class="parcelle" id="parcelle-2">
     <p>
-      Je suis diagnostiqué Schizophrène/TSA/TDAH, j'aime ma couleur de coeur, sa noirceur aussi. La plupart de mes comportements passés sont compréhensibles par ces liaisons de troubles.<br><br>
-      Je souhaite juste t'expliquer mes pensées, sans vouloir troubler ta vie, juste t'apporter cette clarté que tu as sûrement dû attendre. Je sais que je t'ai blessé et ça n'a jamais été mon intention, je te le jure.
+      J'ai eu de nombreuses expériences particulièrement spéciales tant dans le douloureux que dans le positif.<br><br>
+      J'ai accumulé les informations sur la plupart des choses de la vie au fur et à mesure des années, fatigué oui, mais maintenant je suis en coeur avec moi même.
     </p>
     <button class="btn-y2k" onclick="changerParcelle(3)">[ suivant ]</button>
   </div>
@@ -153,14 +157,48 @@
   <!-- Parcelle 3 -->
   <div class="parcelle" id="parcelle-3">
     <p>
-      Je sais maintenant m'exprimer en toute liberté de conscience, et je te le dis avec le coeur : je suis désolé pour tout le mal que j'ai pu te faire.<br><br>
-      Je n'attends rien en retour, juste la vérité comme finalité. Un simple échange pour poser les choses à plat me semble la meilleure chose à faire. Merci à toi d'avoir pris le temps de lire.
+      Je suis enfin devenu petit à petit un homme un peu plus libre chaque jours. Comprendre m'a permis de relativiser, et d'apporter un fonctionnement appart qui me sert de mouvement de vie. Tout ce que je recherchais se concrétise, j'arrive pour le mieux dans le pire, au bord oui, mais je peux maintenant survoler ces rives avec les couleurs que j'ai enfin souhaiter. Je suis libre, je n'ai pas choisis d'être au plus mal, mais j'ai choisi d'être qui je suis maintenant.
     </p>
     <button class="btn-y2k" onclick="changerParcelle(4)">[ suivant ]</button>
   </div>
 
-  <!-- Parcelle 4 : Image finale -->
+  <!-- Parcelle 4 -->
   <div class="parcelle" id="parcelle-4">
+    <p>
+      J'ai creusé tant de temps pour apprendre toujours plus.<br><br>
+      Je suis diagnostiquée Schizophrène/TSA/TDAH donc j'ai une ribambelle de comorbidité, ce qui n'est pas un soucis, j'aime ma couleur de coeur, sa noirceur aussi, je prends ma vie au sens de la raison. La plupart de mes comportements, mécanismes, symptômes, manières d'être et de faire, sont compréhensible par ces liaisons de troubles, dictés d'une façon ou d'une autre par des bouts de pathologie mixés.
+    </p>
+    <button class="btn-y2k" onclick="changerParcelle(5)">[ suivant ]</button>
+  </div>
+
+  <!-- Parcelle 5 -->
+  <div class="parcelle" id="parcelle-5">
+    <p>
+      Je souhaite et j'ai toujours souhaité vouloir me faire comprendre et expliquer mes pensées, et, je suis ici présent encore et encore, pour que tu puisses me laisser une chance d'échanger, sans but précis si ce n' est parler de ce que je n'ai jamais pu te dire, je ne veux pas rentrer dans ta vie pour la troubler encore je te l'assure. Il me faut un moment cette liberté d'exprimer tout ce bordel que j'ai vécu dans ma vie, enfin, tout celui que j'ai laisser à certains moments sans explication ou raison valable.
+    </p>
+    <button class="btn-y2k" onclick="changerParcelle(6)">[ suivant ]</button>
+  </div>
+
+  <!-- Parcelle 6 -->
+  <div class="parcelle" id="parcelle-6">
+    <p>
+      Être clair, dire la vérité, avoir ma liberté de pouvoir enfin le faire, je t'en prie, j'ai grandis et j'ai pour une fois plus aucune censure d'être. Mon envie de donner cette lumière sur ce flou, me permettrait d'avoir enfin cette paix d'esprit, que touts ces doutes que tu as sûrement du avoir ont des réponses, oui je t'ai blessé et ca n'a jamais était mon intention, je te le jure. Mes excuses paraîtront sûrement fade ou amer et ça ne justifiera pas mes comportements passées. Seulement, il y a maintenant des explications et des raisons du pourquoi du comment. Je sais maintenant m'exprimer en toute liberté de conscience, et je te le dis avec le coeur, la pensée et la vie qu'on a mené, que je suis désolé pour tout le mal que je t'ai fais.
+    </p>
+    <button class="btn-y2k" onclick="changerParcelle(7)">[ suivant ]</button>
+  </div>
+
+  <!-- Parcelle 7 -->
+  <div class="parcelle" id="parcelle-7">
+    <p>
+      Je n'attends rien que tu puisses regretter, j'ai toujours voulu être droits et honnête, et c'est la vérité que j'aimerai transmettre aujourd'hui comme finalité. Sans demander de renouement forcé entre nous, un échange pour discuter et apporter un état d'esprit de clarté me semble une des meilleures choses à faire, qui pourrait nous être favorable.<br><br>
+      Mes plus grandes affections à toi Céliou, Merci à toi d'avoir pris le temps de lire, porte toi bien...<br><br>
+      Signé Bastion.
+    </p>
+    <button class="btn-y2k" onclick="changerParcelle(8)">[ finaliser ]</button>
+  </div>
+
+  <!-- Parcelle 8 : Image finale -->
+  <div class="parcelle" id="parcelle-8">
     <img src="image-fin.jpg" alt="Final" class="image-finale">
     <p style="font-size: 1.1rem; letter-spacing: 2px; color: #888;">[ fin de transmission ]</p>
   </div>
@@ -189,7 +227,7 @@
       document.getElementById('parcelle-' + numero).classList.add('active');
     }
 
-    // --- ANIMATION CANVAS (Filaments massifs, étoiles et formes spectrales se dissolvant en poussière) ---
+    // --- ANIMATION CANVAS EN CONTINU (Sans interruption) ---
     const canvas = document.getElementById('canvas-etoiles');
     const ctx = canvas.getContext('2d');
 
@@ -200,7 +238,6 @@
     window.addEventListener('resize', redimensionner);
     redimensionner();
 
-    // Champ d'étoiles très dense
     const nombreEtoiles = 250;
     const etoiles = [];
 
@@ -216,7 +253,6 @@
       });
     }
 
-    // Formes de poussière spectrale se désintégrant
     const spectres = [];
     for (let i = 0; i < 50; i++) {
       spectres.push({
@@ -236,7 +272,7 @@
       ctx.fillStyle = 'rgba(0, 0, 0, 0.22)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // 1. Vagues spectrales multiples en arrière-plan
+      // Vagues spectrales
       ctx.save();
       for (let i = 0; i < 6; i++) {
         ctx.beginPath();
@@ -253,7 +289,7 @@
       ctx.restore();
       angleOnde += 0.01;
 
-      // 2. Gestion des formes spectrales se dégradant en poussière
+      // Formes de poussière spectrale
       spectres.forEach(s => {
         s.y += s.vitesseY;
         s.x += s.dispersion;
@@ -272,7 +308,7 @@
         ctx.fill();
       });
 
-      // 3. Étoiles et filaments stellaires denses interconnectés
+      // Étoiles et filaments stellaires
       etoiles.forEach(e => {
         e.x += e.vitesseX;
         e.y += e.vitesseY;
@@ -294,7 +330,6 @@
         ctx.arc(e.x, e.y, e.taille, 0, Math.PI * 2);
         ctx.fill();
 
-        // Connexions par filaments stellaires rapprochés en grande quantité
         etoiles.forEach(autreEtoile => {
           let dx = e.x - autreEtoile.x;
           let dy = e.y - autreEtoile.y;
@@ -313,6 +348,7 @@
       requestAnimationFrame(animer);
     }
 
+    // Lancement de la boucle d'animation en continu
     animer();
   </script>
 
